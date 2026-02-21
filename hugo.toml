@@ -1,0 +1,49 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-tw'
+title = "Karen's Dev Blog"
+theme = 'PaperMod'
+paginate = 5
+
+[params]
+  env = 'production'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+
+[params.homeInfoParams]
+  Title = "Hi there 👋"
+  Content = "歡迎來到我的開發筆記，記錄學習與實作的點滴。"
+
+[[params.socialIcons]]
+  name = 'github'
+  url = 'https://github.com/karen'
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    style = 'monokai'
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[[menus.main]]
+  name = 'Posts'
+  url = '/posts/'
+  weight = 1
+
+[[menus.main]]
+  name = 'Tags'
+  url = '/tags/'
+  weight = 2
+
+[[menus.main]]
+  name = 'Categories'
+  url = '/categories/'
+  weight = 3
