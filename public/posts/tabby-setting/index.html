@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Tabby的zsh設定和安裝外掛 | Karen&#39;s Dev Blog</title>
+<meta name="keywords" content="zsh, tabby, terminal">
+<meta name="description" content="前言
+
+一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶
+，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License
+也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題
+
+
+一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了
+
+安裝和設定的步驟
+
+安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟）
+
+
+檢查方式：
+echo $SHELL
+如果出現 /bin/zsh 就表示已經安裝
+
+
+安裝 Oh My Zsh plugins
+
+
+
+安裝 autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
+
+
+安裝 syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
+
+
+確認是否有安裝成功
+ls ~/.oh-my-zsh/custom/plugins
+
+
+
+安裝大家推薦的zsh主題 - powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k
+
+設定 .zshrc
+nano ~/.zshrc
+在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=&ldquo;powerlevel10k/powerlevel10k&rdquo;
+ZSH_THEME=&#34;powerlevel10k/powerlevel10k&#34;
+在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting
+plugins=(
+  git
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+套用設定
+source ~/.zshrc
+
+安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。
+brew install --cask font-meslo-lg-nerd-font
+
+設定 Tabby
+
+
+將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF）
+設定預設開啟使用的 shell 為 zsh
+
+或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定
+
+
+
+
+
+完全關閉 Tabby 再重新啟動
+powerlevel10k的初始化設定
+
+
+
+如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用
+顯示正確就照指令按y
+繼續後面幾個字型測驗回答
+繼續選擇一些樣式設定偏好
+
+
+完全關閉 Tabby 再重新啟動
+">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/tabby-setting/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/tabby-setting/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/tabby-setting/">
+  <meta property="og:site_name" content="Karen&#39;s Dev Blog">
+  <meta property="og:title" content="Tabby的zsh設定和安裝外掛">
+  <meta property="og:description" content="前言 一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶 ，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License 也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題
+一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了
+安裝和設定的步驟 安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟） 檢查方式： echo $SHELL 如果出現 /bin/zsh 就表示已經安裝 安裝 Oh My Zsh plugins 安裝 autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions 安裝 syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting 確認是否有安裝成功
+ls ~/.oh-my-zsh/custom/plugins 安裝大家推薦的zsh主題 - powerlevel10k git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \ ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k 設定 .zshrc nano ~/.zshrc 在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=“powerlevel10k/powerlevel10k” ZSH_THEME=&#34;powerlevel10k/powerlevel10k&#34; 在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting plugins=( git z zsh-autosuggestions zsh-syntax-highlighting ) 套用設定 source ~/.zshrc 安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。 brew install --cask font-meslo-lg-nerd-font 設定 Tabby 將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF） 設定預設開啟使用的 shell 為 zsh 或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定 完全關閉 Tabby 再重新啟動 powerlevel10k的初始化設定 如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用 顯示正確就照指令按y 繼續後面幾個字型測驗回答 繼續選擇一些樣式設定偏好 完全關閉 Tabby 再重新啟動 ">
+  <meta property="og:locale" content="zh-tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-22T00:00:00+00:00">
+    <meta property="article:tag" content="Zsh">
+    <meta property="article:tag" content="Tabby">
+    <meta property="article:tag" content="Terminal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tabby的zsh設定和安裝外掛">
+<meta name="twitter:description" content="前言
+
+一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶
+，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License
+也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題
+
+
+一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了
+
+安裝和設定的步驟
+
+安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟）
+
+
+檢查方式：
+echo $SHELL
+如果出現 /bin/zsh 就表示已經安裝
+
+
+安裝 Oh My Zsh plugins
+
+
+
+安裝 autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
+
+
+安裝 syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
+
+
+確認是否有安裝成功
+ls ~/.oh-my-zsh/custom/plugins
+
+
+
+安裝大家推薦的zsh主題 - powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k
+
+設定 .zshrc
+nano ~/.zshrc
+在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=&ldquo;powerlevel10k/powerlevel10k&rdquo;
+ZSH_THEME=&#34;powerlevel10k/powerlevel10k&#34;
+在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting
+plugins=(
+  git
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+套用設定
+source ~/.zshrc
+
+安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。
+brew install --cask font-meslo-lg-nerd-font
+
+設定 Tabby
+
+
+將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF）
+設定預設開啟使用的 shell 為 zsh
+
+或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定
+
+
+
+
+
+完全關閉 Tabby 再重新啟動
+powerlevel10k的初始化設定
+
+
+
+如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用
+顯示正確就照指令按y
+繼續後面幾個字型測驗回答
+繼續選擇一些樣式設定偏好
+
+
+完全關閉 Tabby 再重新啟動
+">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tabby的zsh設定和安裝外掛",
+      "item": "http://localhost:1313/posts/tabby-setting/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tabby的zsh設定和安裝外掛",
+  "name": "Tabby的zsh設定和安裝外掛",
+  "description": "前言 一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶 ，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License 也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題\n一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了\n安裝和設定的步驟 安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟） 檢查方式： echo $SHELL 如果出現 /bin/zsh 就表示已經安裝 安裝 Oh My Zsh plugins 安裝 autosuggestions\ngit clone https://github.com/zsh-users/zsh-autosuggestions \\ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions 安裝 syntax highlighting\ngit clone https://github.com/zsh-users/zsh-syntax-highlighting \\ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting 確認是否有安裝成功\nls ~/.oh-my-zsh/custom/plugins 安裝大家推薦的zsh主題 - powerlevel10k git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \\ ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k 設定 .zshrc nano ~/.zshrc 在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=\u0026ldquo;powerlevel10k/powerlevel10k\u0026rdquo; ZSH_THEME=\u0026#34;powerlevel10k/powerlevel10k\u0026#34; 在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting plugins=( git z zsh-autosuggestions zsh-syntax-highlighting ) 套用設定 source ~/.zshrc 安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。 brew install --cask font-meslo-lg-nerd-font 設定 Tabby 將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF） 設定預設開啟使用的 shell 為 zsh 或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定 完全關閉 Tabby 再重新啟動 powerlevel10k的初始化設定 如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用 顯示正確就照指令按y 繼續後面幾個字型測驗回答 繼續選擇一些樣式設定偏好 完全關閉 Tabby 再重新啟動 ",
+  "keywords": [
+    "zsh", "tabby", "terminal"
+  ],
+  "articleBody": "前言 一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶 ，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License 也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題\n一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了\n安裝和設定的步驟 安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟） 檢查方式： echo $SHELL 如果出現 /bin/zsh 就表示已經安裝 安裝 Oh My Zsh plugins 安裝 autosuggestions\ngit clone https://github.com/zsh-users/zsh-autosuggestions \\ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions 安裝 syntax highlighting\ngit clone https://github.com/zsh-users/zsh-syntax-highlighting \\ ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting 確認是否有安裝成功\nls ~/.oh-my-zsh/custom/plugins 安裝大家推薦的zsh主題 - powerlevel10k git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \\ ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k 設定 .zshrc nano ~/.zshrc 在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=“powerlevel10k/powerlevel10k” ZSH_THEME=\"powerlevel10k/powerlevel10k\" 在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting plugins=( git z zsh-autosuggestions zsh-syntax-highlighting ) 套用設定 source ~/.zshrc 安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。 brew install --cask font-meslo-lg-nerd-font 設定 Tabby 將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF） 設定預設開啟使用的 shell 為 zsh 或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定 完全關閉 Tabby 再重新啟動 powerlevel10k的初始化設定 如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用 顯示正確就照指令按y 繼續後面幾個字型測驗回答 繼續選擇一些樣式設定偏好 完全關閉 Tabby 再重新啟動 ",
+  "wordCount" : "109",
+  "inLanguage": "en",
+  "datePublished": "2025-02-22T00:00:00Z",
+  "dateModified": "2025-02-22T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/tabby-setting/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Karen's Dev Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Karen&#39;s Dev Blog (Alt + H)">Karen&#39;s Dev Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">首頁</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Tabby的zsh設定和安裝外掛
+    </h1>
+    <div class="post-meta"><span title='2025-02-22 00:00:00 +0000 UTC'>February 22, 2025</span>&nbsp;·&nbsp;<span>1 分鐘</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目錄</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%9d%e5%92%8c%e8%a8%ad%e5%ae%9a%e7%9a%84%e6%ad%a5%e9%a9%9f" aria-label="安裝和設定的步驟">安裝和設定的步驟</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<blockquote>
+<p>一開始是因為前陣子公司在查每個人使用的軟體 license，才發現我之前使用的那個終端機軟體是允許個人使用，但在公司的個人使用上有模糊地帶
+，為了避免爭議找了一下資料才發現有 Tabby 可以使用，而且它是 MIT License
+也剛好解決了我在家的 macOS 以及公司 windows 終端機要切換習慣上的的問題</p>
+</blockquote>
+<blockquote>
+<p>一部分也是因為工作變複雜了，需要的指令也變多，我正好在找一個可以自動補全指令或使用過去指令的工具才發現裝外掛就可以了</p>
+</blockquote>
+<h2 id="安裝和設定的步驟">安裝和設定的步驟<a hidden class="anchor" aria-hidden="true" href="#安裝和設定的步驟">#</a></h2>
+<ol>
+<li>安裝zsh和oh-my-zsh（原本就安裝過所以略過這步驟）</li>
+</ol>
+<ul>
+<li>檢查方式：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo $SHELL
+</span></span></code></pre></div>如果出現 /bin/zsh 就表示已經安裝</li>
+</ul>
+<ol start="2">
+<li>安裝 Oh My Zsh plugins</li>
+</ol>
+<ul>
+<li>
+<p>安裝 autosuggestions</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-autosuggestions <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>$ZSH/custom<span style="color:#e6db74">}</span>/plugins/zsh-autosuggestions
+</span></span></code></pre></div></li>
+<li>
+<p>安裝 syntax highlighting</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-syntax-highlighting <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>$ZSH/custom<span style="color:#e6db74">}</span>/plugins/zsh-syntax-highlighting
+</span></span></code></pre></div></li>
+<li>
+<p>確認是否有安裝成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls ~/.oh-my-zsh/custom/plugins
+</span></span></code></pre></div></li>
+</ul>
+<ol start="3">
+<li>安裝大家推薦的zsh主題 - powerlevel10k
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone --depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> https://github.com/romkatv/powerlevel10k.git <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>$ZSH/custom<span style="color:#e6db74">}</span>/themes/powerlevel10k
+</span></span></code></pre></div></li>
+<li>設定 .zshrc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nano ~/.zshrc
+</span></span></code></pre></div>在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=&ldquo;powerlevel10k/powerlevel10k&rdquo;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ZSH_THEME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;powerlevel10k/powerlevel10k&#34;</span>
+</span></span></code></pre></div>在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>plugins<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>  git
+</span></span><span style="display:flex;"><span>  z
+</span></span><span style="display:flex;"><span>  zsh-autosuggestions
+</span></span><span style="display:flex;"><span>  zsh-syntax-highlighting
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span></code></pre></div></li>
+<li>套用設定
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>source ~/.zshrc
+</span></span></code></pre></div></li>
+<li>安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install --cask font-meslo-lg-nerd-font
+</span></span></code></pre></div></li>
+<li>設定 Tabby</li>
+</ol>
+<ul>
+<li>將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF）</li>
+<li>設定預設開啟使用的 shell 為 zsh
+<img alt="新增設定檔" loading="lazy" src="/posts/tabby-setting/image.png"></li>
+<li>或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定
+<img alt="選擇zsh" loading="lazy" src="/posts/tabby-setting/image-1.png">
+<img alt="設定zsh參數及預設目錄" loading="lazy" src="/posts/tabby-setting/image-2.png"></li>
+<li></li>
+</ul>
+<ol start="8">
+<li>完全關閉 Tabby 再重新啟動</li>
+<li>powerlevel10k的初始化設定
+<img alt="確認字型是否正確" loading="lazy" src="/posts/tabby-setting/image-4.png"></li>
+</ol>
+<ul>
+<li>如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用</li>
+<li>顯示正確就照指令按y</li>
+<li>繼續後面幾個字型測驗回答</li>
+<li>繼續選擇一些樣式設定偏好</li>
+</ul>
+<ol start="10">
+<li>完全關閉 Tabby 再重新啟動</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/zsh/">Zsh</a></li>
+      <li><a href="http://localhost:1313/tags/tabby/">Tabby</a></li>
+      <li><a href="http://localhost:1313/tags/terminal/">Terminal</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/sample-post/">
+    <span class="title">下一頁 »</span>
+    <br>
+    <span>用 Hugo 打造個人部落格：從零開始的完整指南</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Karen&#39;s Dev Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '複製';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已複製！';
+            setTimeout(() => {
+                copybutton.innerHTML = '複製';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

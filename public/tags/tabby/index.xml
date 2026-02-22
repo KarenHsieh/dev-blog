@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Karen&#39;s Dev Blog</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on Karen&#39;s Dev Blog</description>
+    <title>Tabby on Karen&#39;s Dev Blog</title>
+    <link>http://localhost:1313/tags/tabby/</link>
+    <description>Recent content in Tabby on Karen&#39;s Dev Blog</description>
     <generator>Hugo -- 0.156.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Sat, 22 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/tabby/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tabby的zsh設定和安裝外掛</title>
       <link>http://localhost:1313/posts/tabby-setting/</link>
@@ -98,13 +98,6 @@
 &lt;ol start=&#34;10&#34;&gt;
 &lt;li&gt;完全關閉 Tabby 再重新啟動&lt;/li&gt;
 &lt;/ol&gt;</description>
-    </item>
-    <item>
-      <title>用 Hugo 打造個人部落格：從零開始的完整指南</title>
-      <link>http://localhost:1313/posts/sample-post/</link>
-      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/sample-post/</guid>
-      <description>這篇文章示範如何使用 Hugo 建立一個靜態部落格網站，包含基本設定、主題安裝與內容撰寫。</description>
     </item>
   </channel>
 </rss>
