@@ -1,9 +1,9 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://karen-blog.zeabur.app/'
 languageCode = 'zh-tw'
 title = "Karen's Dev Blog"
 theme = 'PaperMod'
 [pagination]
-  pagerSize = 5
+  pagerSize = 10
 
 [params]
   env = 'production'
@@ -21,7 +21,7 @@ theme = 'PaperMod'
 
 [[params.socialIcons]]
   name = 'github'
-  url = 'https://github.com/karen'
+  url = 'https://github.com/KarenHsieh'
 
 [markup]
   [markup.highlight]
