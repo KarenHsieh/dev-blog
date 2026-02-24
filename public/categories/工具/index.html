@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/categories/%E5%B7%A5%E5%85%B7/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a29c24210eb31d9ce56f669c66a35c9c51b17376b7764e336a49af7dec914cf0.css" integrity="sha256-opwkIQ6zHZzlb2acZqNcnFGxc3a3dk4zakmvfeyRTPA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -137,7 +137,32 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Tabby的zsh設定和安裝外掛
+    <h2 class="entry-hint-parent">使用 Oh My Posh 設定 PowerShell 提示
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>上一篇：Tabby的zsh設定和安裝外掛
+前言 因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。
+安裝 PowerShell 7 因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。
+先檢查 PowerShell 版本
+$PSVersionTable.PSVersion 使用 PowerShell 5安裝 PowerShell 7
+winget install Microsoft.PowerShell 再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功
+設定 Tabby 預設開啟 PowerShell 7 設定檔 可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式 設定檔與連線 &gt; 新增設定檔 &gt; 選 PowerShell pwsh.exe 設定名稱、程式、參數 設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了 $PSVersionTable.PSVersion 安裝 Oh My Posh 在 PowerShell 7 中安裝 Oh My Posh winget install JanDeDobbeleer.OhMyPosh --source winget 安裝完，重新開啟分頁，執行指令確認是否安裝成功 oh-my-posh --version 為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型 ```PowerShelloh-my-posh font install meslo```安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font 將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF) 建立 PowerShell Profile ```PowerShellnotepad $PROFILE```如果沒有 $PROFILE，會自動建立一個
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-24 00:00:00 +0000 UTC'>February 24, 2025</span>&nbsp;·&nbsp;<span>2 分鐘</span></footer>
+  <a class="entry-link" aria-label="post link to 使用 Oh My Posh 設定 PowerShell 提示" href="http://localhost:1313/posts/windows-oh-my-posh/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Tabby 的 zsh 設定和安裝外掛
     </h2>
   </header>
   <div class="entry-content">
@@ -149,7 +174,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting \ ${ZSH_CUSTOM:-$
 ls ~/.oh-my-zsh/custom/plugins 安裝大家推薦的zsh主題 - powerlevel10k git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \ ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k 設定 .zshrc nano ~/.zshrc 在文件中找到 ZSH_THEME 並將其修改為 ZSH_THEME=“powerlevel10k/powerlevel10k” ZSH_THEME=&#34;powerlevel10k/powerlevel10k&#34; 在文件中找到 plugins 加上 zsh-autosuggestions 和 zsh-syntax-highlighting plugins=( git z zsh-autosuggestions zsh-syntax-highlighting ) 套用設定 source ~/.zshrc 安裝 Nerd Font，是 powerlevel10k主題推薦安裝字體。 brew install --cask font-meslo-lg-nerd-font 設定 Tabby 將預設字體改為 MesloLGMonoNerdFont（或稱 MesloLGS NF） 設定預設開啟使用的 shell 為 zsh 或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定 完全關閉 Tabby 再重新啟動 powerlevel10k的初始化設定 如果在這畫面的中間不是看到菱形◆代表Nerd Font沒有正確套用 顯示正確就照指令按y 繼續後面幾個字型測驗回答 繼續選擇一些樣式設定偏好 完全關閉 Tabby 再重新啟動 </p>
   </div>
   <footer class="entry-footer"><span title='2025-02-22 00:00:00 +0000 UTC'>February 22, 2025</span>&nbsp;·&nbsp;<span>1 分鐘</span></footer>
-  <a class="entry-link" aria-label="post link to Tabby的zsh設定和安裝外掛" href="http://localhost:1313/posts/tabby-setting/"></a>
+  <a class="entry-link" aria-label="post link to Tabby 的 zsh 設定和安裝外掛" href="http://localhost:1313/posts/tabby-setting/"></a>
 </article>
     </main>
     

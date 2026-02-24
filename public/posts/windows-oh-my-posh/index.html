@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用 Oh My Posh 設定 PowerShell 提示 | Karen&#39;s Dev Blog</title>
+<meta name="keywords" content="Windows, PowerShell, Oh My Posh, terminal">
+<meta name="description" content="上一篇：Tabby的zsh設定和安裝外掛
+前言
+因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。
+安裝 PowerShell 7
+
+
+因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。
+
+
+先檢查 PowerShell 版本
+$PSVersionTable.PSVersion
+
+
+使用 PowerShell 5安裝 PowerShell 7
+winget install Microsoft.PowerShell
+
+
+再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功
+
+
+設定 Tabby 預設開啟 PowerShell 7 設定檔
+
+可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式
+設定檔與連線 &gt; 新增設定檔 &gt; 選 PowerShell pwsh.exe
+設定名稱、程式、參數
+
+設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了
+$PSVersionTable.PSVersion
+
+
+安裝 Oh My Posh
+
+在 PowerShell 7 中安裝 Oh My Posh
+winget install JanDeDobbeleer.OhMyPosh --source winget
+
+安裝完，重新開啟分頁，執行指令確認是否安裝成功
+oh-my-posh --version
+
+
+為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型
+```PowerShell
+oh-my-posh font install meslo
+```
+
+
+安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font
+
+將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)
+建立 PowerShell Profile
+```PowerShell
+notepad $PROFILE
+```
+
+
+
+如果沒有 $PROFILE，會自動建立一個">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/windows-oh-my-posh/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a29c24210eb31d9ce56f669c66a35c9c51b17376b7764e336a49af7dec914cf0.css" integrity="sha256-opwkIQ6zHZzlb2acZqNcnFGxc3a3dk4zakmvfeyRTPA=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/windows-oh-my-posh/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="http://localhost:1313/posts/windows-oh-my-posh/">
+  <meta property="og:site_name" content="Karen&#39;s Dev Blog">
+  <meta property="og:title" content="使用 Oh My Posh 設定 PowerShell 提示">
+  <meta property="og:description" content="上一篇：Tabby的zsh設定和安裝外掛
+前言 因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。
+安裝 PowerShell 7 因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。
+先檢查 PowerShell 版本
+$PSVersionTable.PSVersion 使用 PowerShell 5安裝 PowerShell 7
+winget install Microsoft.PowerShell 再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功
+設定 Tabby 預設開啟 PowerShell 7 設定檔 可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式 設定檔與連線 &gt; 新增設定檔 &gt; 選 PowerShell pwsh.exe 設定名稱、程式、參數 設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了 $PSVersionTable.PSVersion 安裝 Oh My Posh 在 PowerShell 7 中安裝 Oh My Posh winget install JanDeDobbeleer.OhMyPosh --source winget 安裝完，重新開啟分頁，執行指令確認是否安裝成功 oh-my-posh --version 為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型 ```PowerShelloh-my-posh font install meslo```安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font 將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF) 建立 PowerShell Profile ```PowerShellnotepad $PROFILE```如果沒有 $PROFILE，會自動建立一個">
+  <meta property="og:locale" content="zh-tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-24T00:00:00+00:00">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="article:tag" content="Oh My Posh">
+    <meta property="article:tag" content="Terminal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Oh My Posh 設定 PowerShell 提示">
+<meta name="twitter:description" content="上一篇：Tabby的zsh設定和安裝外掛
+前言
+因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。
+安裝 PowerShell 7
+
+
+因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。
+
+
+先檢查 PowerShell 版本
+$PSVersionTable.PSVersion
+
+
+使用 PowerShell 5安裝 PowerShell 7
+winget install Microsoft.PowerShell
+
+
+再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功
+
+
+設定 Tabby 預設開啟 PowerShell 7 設定檔
+
+可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式
+設定檔與連線 &gt; 新增設定檔 &gt; 選 PowerShell pwsh.exe
+設定名稱、程式、參數
+
+設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了
+$PSVersionTable.PSVersion
+
+
+安裝 Oh My Posh
+
+在 PowerShell 7 中安裝 Oh My Posh
+winget install JanDeDobbeleer.OhMyPosh --source winget
+
+安裝完，重新開啟分頁，執行指令確認是否安裝成功
+oh-my-posh --version
+
+
+為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型
+```PowerShell
+oh-my-posh font install meslo
+```
+
+
+安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font
+
+將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)
+建立 PowerShell Profile
+```PowerShell
+notepad $PROFILE
+```
+
+
+
+如果沒有 $PROFILE，會自動建立一個">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "使用 Oh My Posh 設定 PowerShell 提示",
+      "item": "http://localhost:1313/posts/windows-oh-my-posh/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用 Oh My Posh 設定 PowerShell 提示",
+  "name": "使用 Oh My Posh 設定 PowerShell 提示",
+  "description": "上一篇：Tabby的zsh設定和安裝外掛\n前言 因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。\n安裝 PowerShell 7 因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。\n先檢查 PowerShell 版本\n$PSVersionTable.PSVersion 使用 PowerShell 5安裝 PowerShell 7\nwinget install Microsoft.PowerShell 再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功\n設定 Tabby 預設開啟 PowerShell 7 設定檔 可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式 設定檔與連線 \u0026gt; 新增設定檔 \u0026gt; 選 PowerShell pwsh.exe 設定名稱、程式、參數 設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了 $PSVersionTable.PSVersion 安裝 Oh My Posh 在 PowerShell 7 中安裝 Oh My Posh winget install JanDeDobbeleer.OhMyPosh --source winget 安裝完，重新開啟分頁，執行指令確認是否安裝成功 oh-my-posh --version 為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型 ```PowerShell\roh-my-posh font install meslo\r```\r安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font 將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF) 建立 PowerShell Profile ```PowerShell\rnotepad $PROFILE\r```\r如果沒有 $PROFILE，會自動建立一個\n",
+  "keywords": [
+    "Windows", "PowerShell", "Oh My Posh", "terminal"
+  ],
+  "articleBody": "上一篇：Tabby的zsh設定和安裝外掛\n前言 因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 上一篇：Tabby的zsh設定和安裝外掛 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。\n安裝 PowerShell 7 因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。\n先檢查 PowerShell 版本\n$PSVersionTable.PSVersion 使用 PowerShell 5安裝 PowerShell 7\nwinget install Microsoft.PowerShell 再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功\n設定 Tabby 預設開啟 PowerShell 7 設定檔 可以參考 上一篇：Tabby的zsh設定和安裝外掛 的設定方式 設定檔與連線 \u003e 新增設定檔 \u003e 選 PowerShell pwsh.exe 設定名稱、程式、參數 設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了 $PSVersionTable.PSVersion 安裝 Oh My Posh 在 PowerShell 7 中安裝 Oh My Posh winget install JanDeDobbeleer.OhMyPosh --source winget 安裝完，重新開啟分頁，執行指令確認是否安裝成功 oh-my-posh --version 為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型 ```PowerShell\roh-my-posh font install meslo\r```\r安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font 將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF) 建立 PowerShell Profile ```PowerShell\rnotepad $PROFILE\r```\r如果沒有 $PROFILE，會自動建立一個\n如果有 $PROFILE，會直接用記事本打開\n加入下面的設定\n# --- Oh My Posh --- # 使用內建主題 # 可以在這換成其他主題名稱 # 改完存檔以後可以執行 . $PROFILE 立刻套用 #oh-my-posh init pwsh --config \"blue-owl\" | Invoke-Expression oh-my-posh init pwsh --config \"takuya\" | Invoke-Expression # --- PSReadLine (autosuggest / prediction / better editing) --- Import-Module PSReadLine # 讓預測（自動建議）來源使用 History（或支援時用 HistoryAndPlugin） # ViewStyle 可用 InlineView（像灰字在後面）或 ListView（像下拉列表） Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView # Tab 補全更像常見 shell：按 Tab 會循環候選 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete 主題可以到 Oh My Posh Themes 找\n立即載入設定\n. $PROFILE 設定常用資料夾快速跳轉與 alias 打開 profile\nnotepad $PROFILE 或需要用編輯器打開可以執行 $PROFILE 指令找檔案路徑\n$PROFILE 在 profile 加入下面的設定\nfunction blog { cd D:\\Users\\myName\\Repos\\dev-blog } 之後值些執行 blog 就可以快速跳轉到 dev-blog 資料夾\n在 profile 加入下面的設定\nfunction ydev { yarn local:DEV } 之後值些執行 ydev 就可以快速執行 yarn local:DEV\n增強 ls 顯示 安裝 Terminal-Icons\nInstall-Module Terminal-Icons -Scope CurrentUser 在 profile 加入下面的設定\nImport-Module Terminal-Icons 原本的 ls 增強的 ls 最後 profile 的設定 # --- Oh My Posh --- # 使用內建主題 # 可以在這換成其他主題名稱 # 改完存檔以後可以執行 . $PROFILE 立刻套用 #oh-my-posh init pwsh --config \"blue-owl\" | Invoke-Expression oh-my-posh init pwsh --config \"takuya\" | Invoke-Expression # --- PSReadLine (autosuggest / prediction / better editing) --- Import-Module PSReadLine # 讓預測（自動建議）來源使用 History（或支援時用 HistoryAndPlugin） # ViewStyle 可用 InlineView（像灰字在後面）或 ListView（像下拉列表） Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView # Tab 補全更像常見 shell：按 Tab 會循環候選 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete # ===== alias ===== function repo { cd D:\\Users\\myName\\Repos } function blog { cd D:\\Users\\myName\\Repos\\dev-blog } function ydev { yarn local:DEV } function yws { yarn local:DEV } # --- Terminal Icons --- Import-Module Terminal-Icons ",
+  "wordCount" : "346",
+  "inLanguage": "en",
+  "datePublished": "2025-02-24T00:00:00Z",
+  "dateModified": "2025-02-24T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/windows-oh-my-posh/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Karen's Dev Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Karen&#39;s Dev Blog (Alt + H)">Karen&#39;s Dev Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">首頁</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      使用 Oh My Posh 設定 PowerShell 提示
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2025-02-24 00:00:00 +0000 UTC'>February 24, 2025</span>&nbsp;·&nbsp;<span>2 分鐘</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目錄</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%9d-powershell-7" aria-label="安裝 PowerShell 7">安裝 PowerShell 7</a></li>
+                <li>
+                    <a href="#%e8%a8%ad%e5%ae%9a-tabby-%e9%a0%90%e8%a8%ad%e9%96%8b%e5%95%9f-powershell-7-%e8%a8%ad%e5%ae%9a%e6%aa%94" aria-label="設定 Tabby 預設開啟 PowerShell 7 設定檔">設定 Tabby 預設開啟 PowerShell 7 設定檔</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%9d-oh-my-posh" aria-label="安裝 Oh My Posh">安裝 Oh My Posh</a></li>
+                <li>
+                    <a href="#%e7%82%ba%e4%ba%86%e8%ae%93-oh-my-posh-%e5%8f%af%e4%bb%a5%e6%ad%a3%e7%a2%ba%e9%a1%af%e7%a4%ba%e4%b8%8d%e4%ba%82%e7%a2%bc%e9%9c%80%e8%a6%81%e5%ae%89%e8%a3%9dnerd-font%e5%ad%97%e5%9e%8b" aria-label="為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型">為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型</a></li>
+                <li>
+                    <a href="#%e5%b0%87tabby%e7%9a%84%e5%ad%97%e5%9e%8b%e6%94%b9%e7%82%bameslolgs-nerd-font-%e6%88%96%e7%a8%b1meslolgs-nf" aria-label="將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)">將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)</a></li>
+                <li>
+                    <a href="#%e5%bb%ba%e7%ab%8b-powershell-profile" aria-label="建立 PowerShell Profile">建立 PowerShell Profile</a></li>
+                <li>
+                    <a href="#%e8%a8%ad%e5%ae%9a%e5%b8%b8%e7%94%a8%e8%b3%87%e6%96%99%e5%a4%be%e5%bf%ab%e9%80%9f%e8%b7%b3%e8%bd%89%e8%88%87-alias" aria-label="設定常用資料夾快速跳轉與 alias">設定常用資料夾快速跳轉與 alias</a></li>
+                <li>
+                    <a href="#%e5%a2%9e%e5%bc%b7-ls-%e9%a1%af%e7%a4%ba" aria-label="增強 ls 顯示">增強 ls 顯示</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e5%be%8c-profile-%e7%9a%84%e8%a8%ad%e5%ae%9a" aria-label="最後 profile 的設定">最後 profile 的設定</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="/posts/tabby-setting/">上一篇：Tabby的zsh設定和安裝外掛</a></p>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 <a href="/posts/tabby-setting/">上一篇：Tabby的zsh設定和安裝外掛</a> 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。</p>
+<h2 id="安裝-powershell-7">安裝 PowerShell 7<a hidden class="anchor" aria-hidden="true" href="#安裝-powershell-7">#</a></h2>
+<ul>
+<li>
+<p>因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。</p>
+</li>
+<li>
+<p>先檢查 PowerShell 版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$PSVersionTable.PSVersion
+</span></span></code></pre></div></li>
+<li>
+<p>使用 PowerShell 5安裝 PowerShell 7</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>winget install Microsoft.PowerShell
+</span></span></code></pre></div></li>
+<li>
+<p>再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功</p>
+</li>
+</ul>
+<h2 id="設定-tabby-預設開啟-powershell-7-設定檔">設定 Tabby 預設開啟 PowerShell 7 設定檔<a hidden class="anchor" aria-hidden="true" href="#設定-tabby-預設開啟-powershell-7-設定檔">#</a></h2>
+<ul>
+<li>可以參考 <a href="/posts/tabby-setting/">上一篇：Tabby的zsh設定和安裝外掛</a> 的設定方式</li>
+<li>設定檔與連線 &gt; 新增設定檔 &gt; 選 PowerShell pwsh.exe</li>
+<li>設定名稱、程式、參數
+<img alt="設定檔" loading="lazy" src="/posts/windows-oh-my-posh/image.png"></li>
+<li>設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$PSVersionTable.PSVersion
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="安裝-oh-my-posh">安裝 Oh My Posh<a hidden class="anchor" aria-hidden="true" href="#安裝-oh-my-posh">#</a></h2>
+<ul>
+<li>在 PowerShell 7 中安裝 Oh My Posh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>winget install JanDeDobbeleer.OhMyPosh --source winget
+</span></span></code></pre></div></li>
+<li>安裝完，重新開啟分頁，執行指令確認是否安裝成功
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>oh-my-posh --version
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="為了讓-oh-my-posh-可以正確顯示不亂碼需要安裝nerd-font字型">為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型<a hidden class="anchor" aria-hidden="true" href="#為了讓-oh-my-posh-可以正確顯示不亂碼需要安裝nerd-font字型">#</a></h2>
+<pre><code>```PowerShell
+oh-my-posh font install meslo
+```
+</code></pre>
+<ul>
+<li>安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font</li>
+</ul>
+<h2 id="將tabby的字型改為meslolgs-nerd-font-或稱meslolgs-nf">將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)<a hidden class="anchor" aria-hidden="true" href="#將tabby的字型改為meslolgs-nerd-font-或稱meslolgs-nf">#</a></h2>
+<h2 id="建立-powershell-profile">建立 PowerShell Profile<a hidden class="anchor" aria-hidden="true" href="#建立-powershell-profile">#</a></h2>
+<pre><code>```PowerShell
+notepad $PROFILE
+```
+</code></pre>
+<ul>
+<li>
+<p>如果沒有 $PROFILE，會自動建立一個</p>
+</li>
+<li>
+<p>如果有 $PROFILE，會直接用記事本打開</p>
+</li>
+<li>
+<p>加入下面的設定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># --- Oh My Posh ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用內建主題</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以在這換成其他主題名稱</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 改完存檔以後可以執行 . $PROFILE 立刻套用</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#oh-my-posh init pwsh --config &#34;blue-owl&#34; | Invoke-Expression</span>
+</span></span><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#e6db74">&#34;takuya&#34;</span> | Invoke-Expression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- PSReadLine (autosuggest / prediction / better editing) ---</span>
+</span></span><span style="display:flex;"><span>Import-Module PSReadLine
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 讓預測（自動建議）來源使用 History（或支援時用 HistoryAndPlugin）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ViewStyle 可用 InlineView（像灰字在後面）或 ListView（像下拉列表）</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Tab 補全更像常見 shell：按 Tab 會循環候選</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+</span></span></code></pre></div></li>
+<li>
+<p>主題可以到 <a href="https://ohmyposh.dev/docs/themes">Oh My Posh Themes</a> 找</p>
+</li>
+<li>
+<p>立即載入設定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>. $PROFILE
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="設定常用資料夾快速跳轉與-alias">設定常用資料夾快速跳轉與 alias<a hidden class="anchor" aria-hidden="true" href="#設定常用資料夾快速跳轉與-alias">#</a></h2>
+<ul>
+<li>
+<p>打開 profile</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>notepad $PROFILE
+</span></span></code></pre></div><p>或需要用編輯器打開可以執行 $PROFILE 指令找檔案路徑</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$PROFILE
+</span></span></code></pre></div></li>
+<li>
+<p>在 profile 加入下面的設定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> blog { cd D:\Users\myName\Repos\dev-blog }
+</span></span></code></pre></div></li>
+<li>
+<p>之後值些執行 blog 就可以快速跳轉到 dev-blog 資料夾</p>
+</li>
+<li>
+<p>在 profile 加入下面的設定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ydev { yarn local<span style="color:#960050;background-color:#1e0010">:</span>DEV }
+</span></span></code></pre></div></li>
+<li>
+<p>之後值些執行 ydev 就可以快速執行 yarn local:DEV</p>
+</li>
+</ul>
+<h2 id="增強-ls-顯示">增強 ls 顯示<a hidden class="anchor" aria-hidden="true" href="#增強-ls-顯示">#</a></h2>
+<ul>
+<li>
+<p>安裝 Terminal-Icons</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Install-Module Terminal-Icons -Scope CurrentUser
+</span></span></code></pre></div></li>
+<li>
+<p>在 profile 加入下面的設定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Import-Module Terminal-Icons
+</span></span></code></pre></div></li>
+<li>
+<p>原本的 ls
+<img alt="原本的 ls" loading="lazy" src="/posts/windows-oh-my-posh/image-1.png"></p>
+</li>
+<li>
+<p>增強的 ls
+<img alt="增強的 ls" loading="lazy" src="/posts/windows-oh-my-posh/image-2.png"></p>
+</li>
+</ul>
+<h2 id="最後-profile-的設定">最後 profile 的設定<a hidden class="anchor" aria-hidden="true" href="#最後-profile-的設定">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Oh My Posh ---</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用內建主題</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以在這換成其他主題名稱</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 改完存檔以後可以執行 . $PROFILE 立刻套用</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#oh-my-posh init pwsh --config &#34;blue-owl&#34; | Invoke-Expression</span>
+</span></span><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#e6db74">&#34;takuya&#34;</span> | Invoke-Expression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- PSReadLine (autosuggest / prediction / better editing) ---</span>
+</span></span><span style="display:flex;"><span>Import-Module PSReadLine
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 讓預測（自動建議）來源使用 History（或支援時用 HistoryAndPlugin）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ViewStyle 可用 InlineView（像灰字在後面）或 ListView（像下拉列表）</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Tab 補全更像常見 shell：按 Tab 會循環候選</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== alias =====</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> repo { cd D:\Users\myName\Repos }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> blog { cd D:\Users\myName\Repos\dev-blog }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ydev { yarn local<span style="color:#960050;background-color:#1e0010">:</span>DEV }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> yws { yarn local<span style="color:#960050;background-color:#1e0010">:</span>DEV }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Terminal Icons ---</span>
+</span></span><span style="display:flex;"><span>Import-Module Terminal-Icons
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/windows/">Windows</a></li>
+      <li><a href="http://localhost:1313/tags/powershell/">PowerShell</a></li>
+      <li><a href="http://localhost:1313/tags/oh-my-posh/">Oh My Posh</a></li>
+      <li><a href="http://localhost:1313/tags/terminal/">Terminal</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/tabby-setting/">
+    <span class="title">下一頁 »</span>
+    <br>
+    <span>Tabby 的 zsh 設定和安裝外掛</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Karen&#39;s Dev Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '複製';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已複製！';
+            setTimeout(() => {
+                copybutton.innerHTML = '複製';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

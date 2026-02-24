@@ -9,7 +9,7 @@
     <lastBuildDate>Sat, 22 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/tabby/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Tabby的zsh設定和安裝外掛</title>
+      <title>Tabby 的 zsh 設定和安裝外掛</title>
       <link>http://localhost:1313/posts/tabby-setting/</link>
       <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/tabby-setting/</guid>
@@ -81,8 +81,16 @@
 &lt;img alt=&#34;新增設定檔&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/tabby-setting/image.png&#34;&gt;&lt;/li&gt;
 &lt;li&gt;或許未來會增加更多設定，所以從原本內建的zsh切一個設定出來，避免到時候還要煩惱要怎麼切也避免污染初始設定
 &lt;img alt=&#34;選擇zsh&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/tabby-setting/image-1.png&#34;&gt;
-&lt;img alt=&#34;設定zsh參數及預設目錄&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/tabby-setting/image-2.png&#34;&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;img alt=&#34;設定zsh參數及預設目錄&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/tabby-setting/image-2.png&#34;&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;完全關閉 Tabby 再重新啟動&lt;/li&gt;

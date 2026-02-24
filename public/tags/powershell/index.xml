@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PowerShell on Karen&#39;s Dev Blog</title>
+    <link>http://localhost:1313/tags/powershell/</link>
+    <description>Recent content in PowerShell on Karen&#39;s Dev Blog</description>
+    <generator>Hugo -- 0.156.0</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Oh My Posh 設定 PowerShell 提示</title>
+      <link>http://localhost:1313/posts/windows-oh-my-posh/</link>
+      <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/windows-oh-my-posh/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/tabby-setting/&#34;&gt;上一篇：Tabby的zsh設定和安裝外掛&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;因為公司使用的是WINDOWS系統，我一直懶得去設定windows的powershell提示，直到 &lt;a href=&#34;http://localhost:1313/posts/tabby-setting/&#34;&gt;上一篇：Tabby的zsh設定和安裝外掛&lt;/a&gt; 都做了，想說也讓windows的powershell也有同樣的提示指令功能好了，所以就來研究一下 Tabby 要怎麼設定提示。&lt;/p&gt;
+&lt;h2 id=&#34;安裝-powershell-7&#34;&gt;安裝 PowerShell 7&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;因為我想要有語法高亮、自動補全、歷史指令的功能，AI建議我使用 PSReadLine 模組，並且說 PowerShell 7 提供的 PSReadLine 模組更完整，所以就來安裝 PowerShell 7。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;先檢查 PowerShell 版本&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$PSVersionTable.PSVersion
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 PowerShell 5安裝 PowerShell 7&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install Microsoft.PowerShell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;再執行一次 $PSVersionTable.PSVersion 看到 Major 7 就表示安裝成功&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;設定-tabby-預設開啟-powershell-7-設定檔&#34;&gt;設定 Tabby 預設開啟 PowerShell 7 設定檔&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;可以參考 &lt;a href=&#34;http://localhost:1313/posts/tabby-setting/&#34;&gt;上一篇：Tabby的zsh設定和安裝外掛&lt;/a&gt; 的設定方式&lt;/li&gt;
+&lt;li&gt;設定檔與連線 &amp;gt; 新增設定檔 &amp;gt; 選 PowerShell pwsh.exe&lt;/li&gt;
+&lt;li&gt;設定名稱、程式、參數
+&lt;img alt=&#34;設定檔&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/windows-oh-my-posh/image.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;設定完以後，重新開啟分頁執行指令確認版本是否為7，是的話就成功了
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$PSVersionTable.PSVersion
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安裝-oh-my-posh&#34;&gt;安裝 Oh My Posh&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在 PowerShell 7 中安裝 Oh My Posh
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install JanDeDobbeleer.OhMyPosh --source winget
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;安裝完，重新開啟分頁，執行指令確認是否安裝成功
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;為了讓-oh-my-posh-可以正確顯示不亂碼需要安裝nerd-font字型&#34;&gt;為了讓 Oh My Posh 可以正確顯示不亂碼，需要安裝Nerd Font字型&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;```PowerShell
+oh-my-posh font install meslo
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;安裝完會出現一長串跟 meslo 字型相關清單，選擇 MesloLGS Nerd Font&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;將tabby的字型改為meslolgs-nerd-font-或稱meslolgs-nf&#34;&gt;將Tabby的字型改為MesloLGS Nerd Font (或稱MesloLGS NF)&lt;/h2&gt;
+&lt;h2 id=&#34;建立-powershell-profile&#34;&gt;建立 PowerShell Profile&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;```PowerShell
+notepad $PROFILE
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果沒有 $PROFILE，會自動建立一個&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
