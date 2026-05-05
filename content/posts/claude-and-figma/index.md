@@ -1,3 +1,12 @@
+---
+title: "第一次使用 Claude Code"
+date: 2026-04-01
+draft: false
+tags: ["claude", "claude-code", "figma"]
+categories: ["工具"]
+summary: ""
+---
+
 claude plugin install figma@claude-plugins-official
 
 完成 OAuth 認證
