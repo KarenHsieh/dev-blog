@@ -1,6 +1,6 @@
 ---
 title: "第一次使用 Claude Code"
-date: 2025-03-03
+date: 2026-03-03
 draft: false
 tags: ["claude", "claude-code"]
 categories: ["工具"]
