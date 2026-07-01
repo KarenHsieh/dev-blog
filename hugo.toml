@@ -1,4 +1,4 @@
-baseURL = 'https://karen-blog.zeabur.app/'
+baseURL = 'https://dev-blog-karen.vercel.app/'
 languageCode = 'zh-tw'
 title = "Karen's Dev Blog"
 theme = 'PaperMod'
